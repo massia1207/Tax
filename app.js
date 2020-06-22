@@ -1,0 +1,130 @@
+//UI ELEMENTS
+const taxcalculator = document.querySelector('#taxCalculator');
+const income = document.querySelector('#income');
+const Status = document.getElementById("status");
+const message = document.querySelector('.message');
+const calcBtn = document.querySelector("#submit");
+const ordTax = document.querySelector('#ordTax');
+const disclaimer = document.querySelector('#disclaimer');
+
+//LISTEN FOR SUBMIT
+calcBtn.addEventListener('click', function(){
+  console.log("clicked");
+  let Ordinary = parseInt(income.value);
+  let MyStatus = Status.options[Status.selectedIndex];
+  console.log(MyStatus.value);
+    if(isNaN(Ordinary)){
+      setMessage("Please Enter Your Income",'red');
+    }else if(MyStatus.value === "0" ){
+      setMessage("Please Select Your Filing Status", 'red');
+    }else{
+      let Tax = myTax(Ordinary, MyStatus.value);
+      
+      setMessage(`Ordinary Federal Income Tax Will Be $${Tax} as a ${MyStatus.text} Taxpayer With $${Ordinary} of Taxable Ordinary Income`, 'black', 'rgb(248, 238, 238)');
+      
+      income.value = '';
+      income.disabled = true;
+      calcBtn.className = 'recalculate'
+      calcBtn.value = "Try Again"  
+      
+      disclaimer.textContent = "Calculated Tax is based on 2020 IRS ordinary income tax rates.  Capital gains, self employment, State or other types of taxes are not considered in this calculation"
+
+    }
+})
+
+//Recalculate Listener
+taxcalculator.addEventListener('mousedown', function(e){
+  if(e.target.className === 'recalculate'){
+    console.log('redo clicked');
+    window.location.reload();
+  }
+})
+
+//set message
+function setMessage(msg, color, bckg){
+  message.textContent = msg;
+  message.style.color = color;
+  message.style.background = bckg;
+}
+
+//MATH FOR TAX
+function myTax(ordinary, status){      
+  let ordTax = 0;
+  let r1 = .1;
+  let r2 = .12;
+  let r3 = .22;
+  let r4 = .24;
+  let r5 = .32;
+  let r6 = .35;
+  let r7 = .37;
+  let t1 = 0, t2=0, t3=0, t4=0, t5=0, t6=0,t7=0;
+  
+    switch(status){
+      case "MFJ":
+        console.log("case is MFJ") 
+        t1 = 19750;
+        t2 = 80250;
+        t3 = 171050;
+        t4 = 326600;
+        t5 = 414700;
+        t6 = 622050;
+        break;
+      case "IND":
+        t1 = 9875;
+        t2 = 40125;
+        t3 = 85525;
+        t4 = 163300;
+        t5 = 207350;
+        t6 = 518400;
+        break;
+      case "MFS":
+        t1 = 9875;
+        t2 = 40125;
+        t3 = 85525;
+        t4 = 163300;
+        t5 = 207350;
+        t6 = 518400;
+        break;
+       case "HOH":
+        t1 = 14100;
+        t2 = 53700;
+        t3 = 85500;
+        t4 = 163300;
+        t5 = 207350;
+        t6 = 518400;
+        break;
+     }
+  
+   ordTax = 0
+   if(ordinary >0){
+   ordTax = Math.min(ordinary, t1)*r1;
+   }
+        
+    if (ordinary > t1){
+      ordTax = ordTax + ((Math.min(ordinary, t2) - t1) * r2);
+    }
+  
+    if (ordinary > t2){
+      ordTax = ordTax + ((Math.min(ordinary, t3) - t2) * r3);
+    }
+     
+    if (ordinary > t3){
+      ordTax = ordTax + ((Math.min(ordinary, t4) - t3) * r4);
+    } 
+      
+    if (ordinary > t4){
+      ordTax = ordTax + ((Math.min(ordinary, t5) - t4) * r5);
+    } 
+      
+    if (ordinary > t5) {
+      ordTax = ordTax + ((Math.min(ordinary, t6) - t5) * r6);
+    }
+      
+    if (ordinary > t6){
+      ordTax = ordTax + ((ordinary - t6) * r7);
+     }
+      
+    return ordTax
+    
+}
+  

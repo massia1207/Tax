@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <title>Tax Calculator</title>
+</head>
+<body>
+  <!-- Tax Info Recieved  -->
+  <section class="section info-received">
+
+  <div class="container">
+    <h1>2020 Federal Tax Calculator</h1>
+    <div id = "taxCalculator">
+    <p>Enter you taxable income and filing status.  Please exclude any capital gains or losses.</p>
+    <input type="number" id="income" lang="en-150" placeholder="Taxable Income">    
+      <select id="status">
+        <option value="0">Please Select Filing Status</option>
+        <option value="IND">Single</option>
+        <option value="MFJ">Married Filing Jointly</option>
+        <option value="MFS">Married Filing Separately</option>
+        <option value="HOH">Head of Household</option>
+      </select>
+    
+    <input type="submit" value = "Calculate" id="submit" class="button button-primary">
+    </div>
+  </div>
+  </section>
+
+<section class="section results">
+<p class="message"></p>
+
+<p id="disclaimer"></p>
+
+</section>
+
+
+
+
+<script src="app.js"></script>
+</body>
+</html>
