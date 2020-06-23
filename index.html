@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="icon" href="images/Logo 80 x 80.jpg">
   <title>Tax Calculator</title>
 </head>
 <body>
@@ -14,8 +15,10 @@
 
   <div class="container">
     <h1>2020 Federal Tax Calculator</h1>
-    <div id = "taxCalculator">
     <p>Enter you taxable income and filing status.  Please exclude any capital gains or losses.</p>
+    
+    <div id = "taxCalculator">
+    <p>
     <input type="number" id="income" lang="en-150" placeholder="Taxable Income">    
       <select id="status">
         <option value="0">Please Select Filing Status</option>
@@ -25,9 +28,15 @@
         <option value="HOH">Head of Household</option>
       </select>
     
-    <input type="submit" value = "Calculate" id="submit" class="button button-primary">
-    </div>
-  </div>
+    <!-- <input type="submit" value = "Calculate" id="submit" class="button button-primary"> -->
+    
+    <a href="#" id = "submit" class="button button-primary">
+      <i class="fa fa-usd"></i>
+      Calculate
+    </a>
+ </div>
+  </p>
+</div>
   </section>
 
 <section class="section results">

@@ -14,31 +14,39 @@ calcBtn.addEventListener('click', function(){
   let MyStatus = Status.options[Status.selectedIndex];
   console.log(MyStatus.value);
     if(isNaN(Ordinary)){
-      setMessage("Please Enter Your Income",'red');
+      setMessage("Please Enter Your Income",'red','');
+      disclaimer.textContent = '';
     }else if(MyStatus.value === "0" ){
-      setMessage("Please Select Your Filing Status", 'red');
+      setMessage("Please Select Your Filing Status", 'red','');
+      disclaimer.textContent = '';
     }else{
-      let Tax = myTax(Ordinary, MyStatus.value);
+      let Tax = myTax(Ordinary, MyStatus.value).toLocaleString('en-US',{
+        sytle: "currency",
+        currency: "USD",
+        minimumFractionDigits:0,
+        maximumFractionDigits: 0,
+      });
       
-      setMessage(`Ordinary Federal Income Tax Will Be $${Tax} as a ${MyStatus.text} Taxpayer With $${Ordinary} of Taxable Ordinary Income`, 'black', 'rgb(248, 238, 238)');
+      setMessage(`Ordinary Federal Income Tax Will Be $${Tax} as a ${MyStatus.text} Taxpayer With $${Ordinary.toLocaleString('en-US')} of Taxable Ordinary Income.`, 'black', 'rgb(248, 238, 238)');
       
-      income.value = '';
-      income.disabled = true;
-      calcBtn.className = 'recalculate'
-      calcBtn.value = "Try Again"  
+      // income.value = '';
+      income.disabled = false;
+      Status.disabled = false;
+      // calcBtn.className += ' recalculate'
+      // calcBtn.text = "Try Again"  
       
-      disclaimer.textContent = "Calculated Tax is based on 2020 IRS ordinary income tax rates.  Capital gains, self employment, State or other types of taxes are not considered in this calculation"
+      disclaimer.textContent = "The calculated amount of tax shown is based on 2020 IRS ordinary income tax rates.  Capital gains, self employment, state or other types of taxes are not considered in this calculation."
 
     }
 })
 
 //Recalculate Listener
-taxcalculator.addEventListener('mousedown', function(e){
-  if(e.target.className === 'recalculate'){
-    console.log('redo clicked');
-    window.location.reload();
-  }
-})
+// taxcalculator.addEventListener('mousedown', function(e){
+//   if(e.target.className === 'button button-primary recalculate'){
+//     console.log('redo clicked');
+//     window.location.reload();
+//   }
+// })
 
 //set message
 function setMessage(msg, color, bckg){
@@ -124,7 +132,9 @@ function myTax(ordinary, status){
       ordTax = ordTax + ((ordinary - t6) * r7);
      }
       
-    return ordTax
+    
+    
+     return ordTax
     
 }
   
