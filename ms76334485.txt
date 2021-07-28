@@ -1,0 +1,5 @@
+﻿{
+  "Description": "Domain ownership verification file for Microsoft 365 - place in the website root",
+  "Domain": "massia.net",
+  "Id": "8e2b154e-575a-4cd1-9e36-6a6be2564e3b"
+}
